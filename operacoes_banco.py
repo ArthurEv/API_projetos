@@ -10,6 +10,24 @@ def obterConexao():
     )
     return conexao
 
+#Obtém 3 cursos disponíveis para página inicial
+def obter3CursosDisponiveis():
+    conexao = obterConexao()
+    cursor = conexao.cursor(dictionary=True)
+    cursor.execute("SELECT* FROM curso LIMIT 3")
+    cursos = cursor.fetchall()
+    conexao.close()
+    return cursos
+
+#Obtém 3 cursos que o aluno está matriculado para página inicial
+def obter3CursosMatriculados(idaluno):
+    conexao = obterConexao()
+    cursor = conexao.cursor(dictionary=True)
+    cursor.execute("SELECT curso.titulo,curso.descricao FROM projetos.matricula AS matricula INNER JOIN projetos.curso AS curso ON matricula.idcurso = curso.id WHERE matricula.idaluno = %s LIMIT 3",(idaluno,))
+    cursos = cursor.fetchall()
+    conexao.close()
+    return cursos
+
 #Obtém todos os cursos disponíveis
 def obterCursosDisponiveis():
     conexao = obterConexao()
@@ -19,13 +37,31 @@ def obterCursosDisponiveis():
     conexao.close()
     return cursos
 
-#Obtém 3 cursos disponíveis para página inicial
-def obter3CursosDisponiveis():
+#Obtém todos os cursos que o aluno está matriculado
+def obterCursosMatriculados(idaluno):
     conexao = obterConexao()
     cursor = conexao.cursor(dictionary=True)
-    cursor.execute("SELECT* FROM curso LIMIT 3")
+    cursor.execute("SELECT curso.titulo,curso.descricao FROM projetos.matricula AS matricula INNER JOIN projetos.curso AS curso ON matricula.idcurso = curso.id WHERE matricula.idaluno = %s",(idaluno,))
     cursos = cursor.fetchall()
     conexao.close()
     return cursos
+
+#Obtém todas as aulas de um curso
+def obterAulas(id):
+    conexao = obterConexao()
+    cursor = conexao.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM aula WHERE idcurso = %s",(id,))
+    aulas = cursor.fetchall()
+    conexao.close()
+    return aulas
+
+#Obtém dados de uma aula
+def obterDadosAula(id,numero):
+    conexao = obterConexao()
+    cursor = conexao.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM aula WHERE idcurso = %s and numero = %s", (id,numero))
+    aula = cursor.fetchone()
+    conexao.close()
+    return aula
 
 print(obterCursosDisponiveis())
