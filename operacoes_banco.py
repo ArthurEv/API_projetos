@@ -10,6 +10,15 @@ def obterConexao():
     )
     return conexao
 
+#Obtém informações do aluno
+def obterAluno(id):
+    conexao = obterConexao()
+    cursor = conexao.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM aluno WHERE id = %s",(id,))
+    cursos = cursor.fetchall()
+    conexao.close()
+    return cursos
+
 #Obtém 3 cursos disponíveis para página inicial
 def obter3CursosDisponiveis():
     conexao = obterConexao()
@@ -47,19 +56,19 @@ def obterCursosMatriculados(idaluno):
     return cursos
 
 #Obtém todas as aulas de um curso
-def obterAulas(id):
+def obterAulas(idcurso):
     conexao = obterConexao()
     cursor = conexao.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM aula WHERE idcurso = %s",(id,))
+    cursor.execute("SELECT * FROM aula WHERE idcurso = %s",(idcurso,))
     aulas = cursor.fetchall()
     conexao.close()
     return aulas
 
 #Obtém dados de uma aula
-def obterDadosAula(id,numero):
+def obterDadosAula(idcurso,numero):
     conexao = obterConexao()
     cursor = conexao.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM aula WHERE idcurso = %s and numero = %s", (id,numero))
+    cursor.execute("SELECT * FROM aula WHERE idcurso = %s and numero = %s", (idcurso,numero))
     aula = cursor.fetchone()
     conexao.close()
     return aula

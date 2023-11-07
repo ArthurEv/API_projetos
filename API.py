@@ -5,6 +5,12 @@ from operacoes_banco import *
 app = Flask(__name__)
 CORS(app)
 
+#endpoint para obter aluno
+@app.route("/aluno/<int:id>", methods=["GET"])
+def obter_aluno(id):
+    aluno = obterAluno(id)
+    return jsonify(aluno)
+
 #endpoint para obter 3 cursos disponíveis para página inicial
 @app.route("/3cursosDisponiveis", methods=["GET"])
 def obter_3CursosDisponiveis():
@@ -30,15 +36,15 @@ def obter_CursosMatriculados(id):
     return jsonify(cursos)
 
 #endpoint para obter todas as aulas de um curso
-@app.route("/aulas/<int:id>", methods=["GET"])
-def obter_Aulas(id):
-    aulas = obterAulas(id)
+@app.route("/aulas/<int:idcurso>", methods=["GET"])
+def obter_Aulas(idcurso):
+    aulas = obterAulas(idcurso)
     return jsonify(aulas)
 
 #endpoint para obter dados de uma aula
-@app.route("/aula/<int:id>/<int:numero>", methods=["GET"])
-def obter_DadosAula(id,numero):
-    aula = obterDadosAula(id,numero)
+@app.route("/aula/<int:idcurso>/<int:numero>", methods=["GET"])
+def obter_DadosAula(idcurso,numero):
+    aula = obterDadosAula(idcurso,numero)
     return jsonify(aula)
 
 app.run()
