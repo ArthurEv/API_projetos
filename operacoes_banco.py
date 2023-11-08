@@ -73,4 +73,11 @@ def obterDadosAula(idcurso,numero):
     conexao.close()
     return aula
 
-print(obterCursosDisponiveis())
+#Cadastra aluno
+def cadastrarAluno(aluno):
+    conexao = obterConexao()
+    cursor = conexao.cursor()
+    sql = "INSERT INTO aluno (nome,email,senha,nascimento,responsavel,avatar) VALUES (%s,%s,%s,%s,%s,%s)"
+    cursor.execute(sql, [aluno['nome'], aluno['email'], aluno['senha'], aluno['nascimento'], aluno['responsavel'], aluno['avatar']])
+    conexao.commit()
+    conexao.close()

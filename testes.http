@@ -1,4 +1,4 @@
-GET http://127.0.0.1:5000/aluno/1 HTTP/1.1
+GET http://127.0.0.1:5000/aluno/3 HTTP/1.1
 
 ###
 
@@ -23,3 +23,17 @@ GET http://127.0.0.1:5000/aulas/1 HTTP/1.1
 ###
 
 GET http://127.0.0.1:5000/aula/1/1 HTTP/1.1
+
+###
+
+POST http://127.0.0.1:5000/aluno HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "julia",
+    "email": "julia@email.com",
+    "senha": "123456",
+    "nascimento": "1999-01-01",
+    "responsavel":"mae da julia",
+    "avatar":"hipopotamo"
+}

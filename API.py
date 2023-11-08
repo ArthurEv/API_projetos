@@ -47,4 +47,12 @@ def obter_DadosAula(idcurso,numero):
     aula = obterDadosAula(idcurso,numero)
     return jsonify(aula)
 
+
+#endpoint para cadastrar aluno
+@app.route("/aluno", methods=["POST"])
+def cadastrar_aluno():
+    aluno = request.json
+    cadastrarAluno(aluno)
+    return (jsonify({"mensagem":"Aluno cadastrado com sucesso"}))
+
 app.run()
