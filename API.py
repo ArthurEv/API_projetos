@@ -42,9 +42,9 @@ def obter_Aulas(idcurso):
     return jsonify(aulas)
 
 #endpoint para obter dados de uma aula
-@app.route("/aula/<int:idcurso>/<int:numero>", methods=["GET"])
-def obter_DadosAula(idcurso,numero):
-    aula = obterDadosAula(idcurso,numero)
+@app.route("/aula/<int:idaula>", methods=["GET"])
+def obter_DadosAula(idaula):
+    aula = obterDadosAula(idaula)
     return jsonify(aula)
 
 

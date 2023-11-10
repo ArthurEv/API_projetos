@@ -32,7 +32,7 @@ def obter3CursosDisponiveis():
 def obter3CursosMatriculados(idaluno):
     conexao = obterConexao()
     cursor = conexao.cursor(dictionary=True)
-    cursor.execute("SELECT curso.titulo,curso.descricao FROM projetos.matricula AS matricula INNER JOIN projetos.curso AS curso ON matricula.idcurso = curso.id WHERE matricula.idaluno = %s LIMIT 3",(idaluno,))
+    cursor.execute("SELECT curso.titulo,curso.descricao,curso.id FROM projetos.matricula AS matricula INNER JOIN projetos.curso AS curso ON matricula.idcurso = curso.id WHERE matricula.idaluno = %s LIMIT 3",(idaluno,))
     cursos = cursor.fetchall()
     conexao.close()
     return cursos
@@ -50,7 +50,7 @@ def obterCursosDisponiveis():
 def obterCursosMatriculados(idaluno):
     conexao = obterConexao()
     cursor = conexao.cursor(dictionary=True)
-    cursor.execute("SELECT curso.titulo,curso.descricao FROM projetos.matricula AS matricula INNER JOIN projetos.curso AS curso ON matricula.idcurso = curso.id WHERE matricula.idaluno = %s",(idaluno,))
+    cursor.execute("SELECT curso.titulo,curso.descricao,curso.id FROM projetos.matricula AS matricula INNER JOIN projetos.curso AS curso ON matricula.idcurso = curso.id WHERE matricula.idaluno = %s",(idaluno,))
     cursos = cursor.fetchall()
     conexao.close()
     return cursos
@@ -65,10 +65,10 @@ def obterAulas(idcurso):
     return aulas
 
 #Obtém dados de uma aula
-def obterDadosAula(idcurso,numero):
+def obterDadosAula(idaula):
     conexao = obterConexao()
     cursor = conexao.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM aula WHERE idcurso = %s and numero = %s", (idcurso,numero))
+    cursor.execute("SELECT * FROM aula WHERE id = %s", (idaula,))
     aula = cursor.fetchone()
     conexao.close()
     return aula
