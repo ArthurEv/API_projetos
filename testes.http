@@ -18,11 +18,15 @@ GET http://127.0.0.1:5000/cursosMatriculados/1 HTTP/1.1
 
 ###
 
+GET http://127.0.0.1:5000/curso/1 HTTP/1.1
+
+###
+
 GET http://127.0.0.1:5000/aulas/1 HTTP/1.1
 
 ###
 
-GET http://127.0.0.1:5000/aula/1/1 HTTP/1.1
+GET http://127.0.0.1:5000/aula/1 HTTP/1.1
 
 ###
 
@@ -37,3 +41,125 @@ content-type: application/json
     "responsavel":"mae da julia",
     "avatar":"hipopotamo"
 }
+
+###
+
+POST http://127.0.0.1:5000/forum HTTP/1.1
+content-type: application/json
+
+{
+    "titulo": "Aula de violao",
+    "assunto": "Estou com dúvidas na quarta aula do curso de violao",
+    "idaluno": "1"
+}
+
+###
+
+GET http://127.0.0.1:5000/forum HTTP/1.1
+
+###
+
+GET http://127.0.0.1:5000/forum/1 HTTP/1.1
+
+###
+
+GET http://127.0.0.1:5000/mensagens/1 HTTP/1.1
+
+###
+
+POST http://127.0.0.1:5000/mensagem HTTP/1.1
+content-type: application/json
+
+{
+    "mensagem": "Eu vi no vídeo que tem que fazer desse jeito",
+    "idforum": 2,
+    "idaluno": 3
+}
+
+###
+
+POST http://127.0.0.1:5000/matricula HTTP/1.1
+content-type: application/json
+
+{
+    "idcurso": 1,
+    "idaluno": 3
+}
+
+###
+
+GET  http://127.0.0.1:5000/matriculado/1/1 HTTP/1.1
+
+###
+
+GET  http://127.0.0.1:5000/proximaAula/1/5 HTTP/1.1
+
+
+###
+PUT http://127.0.0.1:5000/atualizarAluno/7 HTTP/1.1
+content-type: application/json
+
+{
+    "senha": "abcde",
+    "avatar": "leão"
+}
+
+###
+
+POST http://127.0.0.1:5000/curso HTTP/1.1
+content-type: application/json
+
+{
+    "titulo": "Curso de teste",
+    "descricao": "Curso de teste",
+    "idade": 10,
+    "quantidade_aulas": 10,
+    "idprofessor": 1
+}
+
+###
+PUT http://127.0.0.1:5000/curso/10 HTTP/1.1
+content-type: application/json
+
+{
+    "titulo": "Curso de teste2",
+    "descricao": "Curso de teste",
+    "idade": 10,
+    "quantidade_aulas": 10,
+    "idprofessor": 1
+}
+
+###
+DELETE  http://127.0.0.1:5000/curso/10 HTTP/1.1
+
+###
+
+POST http://127.0.0.1:5000/aula HTTP/1.1
+content-type: application/json
+
+{
+    "titulo": "aula",
+    "descricao": "aula de teste",
+    "video": "teste",
+    "numero": 10,
+    "idcurso": 7
+}
+
+###
+PUT http://127.0.0.1:5000/aula/11 HTTP/1.1
+content-type: application/json
+
+{
+    "titulo": "aula2",
+    "descricao": "aula de teste",
+    "video": "teste",
+    "numero": 10,
+    "idcurso": 7
+}
+
+###
+DELETE  http://127.0.0.1:5000/aula/11 HTTP/1.1
+
+###
+
+GET http://127.0.0.1:5000/professores HTTP/1.1
