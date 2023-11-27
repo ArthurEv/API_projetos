@@ -10,6 +10,17 @@ def obterConexao():
     )
     return conexao
 
+#Verificar se existe aluno com o email e senha informados
+def verificarAluno(email,senha):
+    conexao = obterConexao()
+    cursor = conexao.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM aluno WHERE email = %s AND senha = %s",(email,senha))
+    aluno = cursor.fetchone()
+    conexao.close()
+    if aluno is None:
+        return "Não existe aluno com o email e senha informados"
+    return aluno
+
 #Obtém informações do aluno
 def obterAluno(id):
     conexao = obterConexao()
@@ -41,7 +52,7 @@ def obter3CursosMatriculados(idaluno):
 def obterCursosDisponiveis():
     conexao = obterConexao()
     cursor = conexao.cursor(dictionary=True)
-    cursor.execute("SELECT curso.titulo,curso.descricao,curso.id,curso.quantidade_aulas,curso.idade,curso.idprofessor,professor.nome FROM curso INNER JOIN professor ON curso.idprofessor = professor.id")
+    cursor.execute("SELECT curso.titulo,curso.descricao,curso.id,curso.quantidade_aulas,curso.idade,curso.idprofessor,professor.nome FROM curso INNER JOIN professor ON curso.idprofessor = professor.id ORDER BY curso.titulo")
     cursos = cursor.fetchall()
     conexao.close()
     return cursos
@@ -68,7 +79,7 @@ def obterCurso(idcurso):
 def obterAulas(idcurso):
     conexao = obterConexao()
     cursor = conexao.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM aula WHERE idcurso = %s",(idcurso,))
+    cursor.execute("SELECT * FROM aula WHERE idcurso = %s ORDER BY numero",(idcurso,))
     aulas = cursor.fetchall()
     conexao.close()
     return aulas

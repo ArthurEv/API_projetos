@@ -5,6 +5,13 @@ from operacoes_banco import *
 app = Flask(__name__)
 CORS(app)
 
+#endpoint para verificar se existe aluno com o email e senha informados
+@app.route("/verificarAluno", methods=["POST"])
+def verificar_aluno():
+    aluno = request.json
+    aluno = verificarAluno(aluno["email"],aluno["senha"])
+    return jsonify(aluno)
+
 #endpoint para obter aluno
 @app.route("/aluno/<int:id>", methods=["GET"])
 def obter_aluno(id):
