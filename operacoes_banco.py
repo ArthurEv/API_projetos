@@ -15,10 +15,10 @@ def verificarAluno(email,senha):
     conexao = obterConexao()
     cursor = conexao.cursor(dictionary=True)
     cursor.execute("SELECT * FROM aluno WHERE email = %s AND senha = %s",(email,senha))
-    aluno = cursor.fetchone()
+    aluno = cursor.fetchall()
     conexao.close()
-    if aluno is None:
-        return "Não existe aluno com o email e senha informados"
+    # if aluno is None:
+    #     return "Não existe aluno com o email e senha informados"
     return aluno
 
 #Obtém informações do aluno
